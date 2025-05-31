@@ -48,25 +48,25 @@ public class JosephusSim {
 
 
    public void eliminate() {
-    if (track == null) {
-        track = circle;
-    }
-
-    for (int i = 1; i < eliminationCount - 1; i++) {
-        track = track.next;
-    }
-    PersonNode eliminated = track.next;
-    System.out.println("Eliminated: " + eliminated.name);
-    track.next = eliminated.next;
-
-    if (eliminated == circle) {
-        circle = eliminated.next;
-    }
-
-    track = track.next;
-
-    size--;
-}
+       if (track == null) {
+           track = circle;
+       }
+   
+       for (int i = 1; i < eliminationCount - 1; i++) {
+           track = track.next;
+       }
+       PersonNode eliminated = track.next;
+       System.out.println("Eliminated: " + eliminated.name);
+       track.next = eliminated.next;
+   
+       if (eliminated == circle) {
+           circle = eliminated.next;
+       }
+   
+       track = track.next;
+   
+       size--;
+   }
 
    public boolean isOver() {
       return size == 1;
