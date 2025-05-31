@@ -1,0 +1,60 @@
+import java.util.*;
+import java.io.*;
+import java.util.Random;
+
+public class JosephusSim {
+   private PersonNode circle;     // a PersonNode pointer that tracks first node
+   private int size;              // the number of people in the circle
+   private int eliminationCount;  // the number to count to for elimination       
+   private PersonNode track;      // a PersonNode pointer to help with elimination
+
+  public JosephusSim(String fileName) {
+      try {
+          Scanner file = new Scanner(new File(fileName));
+          
+          circle = null; // start empty
+          size = 0;
+  
+          while (file.hasNext()) {
+              String name = file.next();
+              PersonNode newNode = new PersonNode(name);
+  
+              if (circle == null) {
+                  // first node points to itself
+                  circle = newNode;
+                  newNode.next = circle;
+              } else {
+                  // add newNode after circle, then rotate circle pointer to newNode
+                  PersonNode temp = circle;
+                  // find last node (the one whose next is circle)
+                  while (temp.next != circle) {
+                      temp = temp.next;
+                  }
+                  temp.next = newNode;
+                  newNode.next = circle;
+              }
+              size++;
+          }
+  
+          // random elimination count between 1 and size/2 (assuming size >= 2)
+          Random random = new Random();
+          eliminationCount = random.nextInt(1, size / 2 + 1);
+          System.out.println("=== Elimination count is " + eliminationCount + " ===");
+  
+      } catch (FileNotFoundException e) {
+          System.out.println("Something went wrong with " + fileName);
+      }
+  }
+
+
+   public void eliminate() {
+
+   }
+
+   public boolean isOver() {
+      return size == 1;
+   }
+
+   public String toString() {
+    
+}
