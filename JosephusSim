@@ -48,18 +48,25 @@ public class JosephusSim {
 
 
    public void eliminate() {
-      for (int i = 1; i < eliminationCount; i++) {
-            track = track.next;
-         }
-      PersonNode eliminated = track; // The person to be eliminated
-      System.out.println("Eliminated: " + eliminated.name);
-      track.next = eliminated.next;
-      if (eliminated == circle) {
-         circle = eliminated.next;
-      }
-      track = track.next;
-      size--;
-   }
+    if (track == null) {
+        track = circle;
+    }
+
+    for (int i = 1; i < eliminationCount - 1; i++) {
+        track = track.next;
+    }
+    PersonNode eliminated = track.next;
+    System.out.println("Eliminated: " + eliminated.name);
+    track.next = eliminated.next;
+
+    if (eliminated == circle) {
+        circle = eliminated.next;
+    }
+
+    track = track.next;
+
+    size--;
+}
 
    public boolean isOver() {
       return size == 1;
@@ -95,3 +102,53 @@ public class JosephusSim {
       return result;
    }
 }
+
+/*
+=== Elimination count is 2 ===
+1-Muhammad 2-Beza 3-Ibrar 4-Nur 5-Krystal 6-River 7-Soham 8-Leon 9-Will 10-Qiao 
+
+Continue elimination? <press enter>
+
+Eliminated: Beza
+1-Ibrar 2-Nur 3-Krystal 4-River 5-Soham 6-Leon 7-Will 8-Qiao 9-Muhammad 
+
+Continue elimination? <press enter>
+
+Eliminated: Nur
+1-Krystal 2-River 3-Soham 4-Leon 5-Will 6-Qiao 7-Muhammad 8-Ibrar 
+
+Continue elimination? <press enter>
+
+Eliminated: River
+1-Soham 2-Leon 3-Will 4-Qiao 5-Muhammad 6-Ibrar 7-Krystal 
+
+Continue elimination? <press enter>
+
+Eliminated: Leon
+1-Will 2-Qiao 3-Muhammad 4-Ibrar 5-Krystal 6-Soham 
+
+Continue elimination? <press enter>
+
+Eliminated: Qiao
+1-Muhammad 2-Ibrar 3-Krystal 4-Soham 5-Will 
+
+Continue elimination? <press enter>
+
+Eliminated: Ibrar
+1-Krystal 2-Soham 3-Will 4-Muhammad 
+
+Continue elimination? <press enter>
+
+Eliminated: Soham
+1-Will 2-Muhammad 3-Krystal 
+
+Continue elimination? <press enter>
+
+Eliminated: Muhammad
+1-Krystal 2-Will 
+
+Continue elimination? <press enter>
+
+Eliminated: Will
+Last survivor: Krystal
+*/
