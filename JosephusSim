@@ -66,5 +66,32 @@ public class JosephusSim {
    }
 
    public String toString() {
-    
+      if (circle == null) {
+         return "";
+      }
+
+      String result = "";
+
+      // If there's only one person left, display the survivor
+      if (isOver()) {
+         result += "Last survivor: " + circle.name;
+      } else {
+         // If this is the first call, initialize the tracker
+         if (track == null) {
+            track = circle;
+         }
+
+         // Traverse and print all remaining people in the circle
+         PersonNode start = track;
+         int count = 1;
+
+         do {
+            result += count + "-" + track.name + " ";
+            track = track.next;
+            count++;
+         } while (track != start);
+      }
+
+      return result;
+   }
 }
